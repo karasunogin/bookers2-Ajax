@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def index
@@ -26,6 +28,19 @@ class UsersController < ApplicationController
     end
   end
 
+  # フォロー一覧
+  def follows
+    user = User.find(params[:user_id])
+    @users = user.following_user
+  end
+
+ # フォロワー一覧
+  def followers
+    user = User.find(params[:user_id])
+    @users = user.follower_user
+  end
+
+
   private
 
   def user_params
@@ -38,11 +53,14 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-end
 
-def is_matching_login_user
+  def is_matching_login_user
   user = User.find(params[:id])
   unless user.id == current_user.id
     redirect_to books_path
   end
+  end
+
 end
+
+
