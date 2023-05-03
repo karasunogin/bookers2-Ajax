@@ -9,8 +9,8 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
 
   # フォローをした（下）、された（上）の関係
-  has_many :follower, class_name: "Relationships", foreign_key: "follower_id", dependent: :destroy
-  has_many :followed, class_name: "Relationships", foreign_key: "followed_id", dependent: :destroy
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   # 一覧画面で使う
   has_many :following_user, through: :follower, source: :followed  #自分がフォローしている人
