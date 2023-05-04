@@ -1,2 +1,7 @@
-<h1>Seaches#search</h1>
-<p>Find me in app/views/seaches/search.html.erb</p>
+<% if @model == 'user' %>
+  <h3>Users search for <%= @content %></h3>
+  <%= render 'users/index', users: @records %>
+<% else @model == 'posts' %>
+  <h3>Books search for <%= @content %></h3>
+    <%= render 'posts/index', posts: @records %>
+<% end %>
