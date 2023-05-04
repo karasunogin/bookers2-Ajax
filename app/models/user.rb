@@ -11,7 +11,6 @@ class User < ApplicationRecord
   # フォローをした（下）、された（上）の関係
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-
   # 一覧画面で使う
   has_many :following_user, through: :follower, source: :followed  #自分がフォローしている人
   has_many :follower_user, through: :followed, source: :follower   #自分をフォローしている人
@@ -39,6 +38,20 @@ class User < ApplicationRecord
   # フォローしていればtrueを返す
   def following?(user)
     following_user.include?(user)
+  end
+
+  def self.looks(search,word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?", "%#{word}%")
+    else
+      @user = User.all
+    end
   end
 
 end
