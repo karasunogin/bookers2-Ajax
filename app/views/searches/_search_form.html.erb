@@ -1,3 +1,4 @@
+<div class="d-flex justify-content-center mb-2">
 <% if user_signed_in? %>
     <%= form_tag(search_path, method: :get) do %>
       <%= text_field_tag 'content' %>
@@ -6,3 +7,4 @@
       <%= submit_tag '検索' %>
     <% end %>
 <% end %>
+</div>
