@@ -37,21 +37,11 @@
               <%= @book.user.name %>
                 <% end %>
             </td>
-            <td>
-                <%= book_comment.comment %>
-              <% if book_comment.user == current_user %>
-                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
-              <% end %>
+            <td id="comments_btn_">
+              <%= render "book_comments/comments", books: @books, book_comment: book_comment %>
             </td>
-          </tr>
-            <% end %>
-        </table>
-          <div class="form-group">
-            <%= form_with model: [@book, @book_comment] do |f| %>
-              <%= f.text_area :comment, row: '5' %>
-              <%= f.submit "送信" %>
-            <% end %>
-          </div>
+          <% end %>
+      </table>
     </div>
   </div>
 </div>

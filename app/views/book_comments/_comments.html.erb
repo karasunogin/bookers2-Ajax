@@ -1,0 +1,10 @@
+                <%= book_comment.comment %>
+              <% if book_comment.user == current_user %>
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger" %>
+              <% end %>
+
+
+            <%= form_with (model: [books, book_comment], remote: true) do |f| %>
+              <%= f.text_area :comment, row: '5' %>
+              <%= f.submit "送信" %>
+            <% end %>
