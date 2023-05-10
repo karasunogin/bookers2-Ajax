@@ -25,23 +25,17 @@
             <%= render 'favorites/favorite-btn', book: @book %>
           </td>
           <td>
-            <p>コメント数:<%= @book.book_comments.count %></p>
+            <p id="comment_count"><%= "コメント数:" + @book.book_comments.count.to_s %></p>
           </td>
         </tr>
       </table>
-      <table>
-          <% @book.book_comments.each do |book_comment| %>
-          <tr>
-            <td><%= link_to(@book.user) do %>
-              <%= image_tag @book.user.get_profile_image, size:"50x50" %><br />
-              <%= @book.user.name %>
-                <% end %>
-            </td>
-            <td id="comments_btn_">
-              <%= render "book_comments/comments", books: @books, book_comment: book_comment %>
-            </td>
-          <% end %>
+
+      <table id="show_comments">
+        <%= render "book_comments/show",book: @book %>
       </table>
+      <div id="comment_btn">
+        <%= render "book_comments/comments", book: @book, book_comment: @book_comment %>
+      </div>
     </div>
   </div>
 </div>

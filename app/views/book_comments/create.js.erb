@@ -1,1 +1,3 @@
-$("#comments_btn_<%= @book.id %>").html("<%= j(render 'book_comments/comments', books: @books ,book_comment: @book_comment) %>");
+$("#show_comments").html("<%= j(render 'book_comments/show', book: @book) %>");
+$('#comment_count').html("<%= "コメント数:" + @book.book_comments.count.to_s %>")
+$("textarea").val('');
